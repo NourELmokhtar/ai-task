@@ -1,0 +1,328 @@
+/* Global styles and design tokens. Shared components use these classes and CSS variables. */
+
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --border: #e2e5ea;
+  --hover: #f0f2f5;
+  --text: #1c2430;
+  --text-muted: #5b6573;
+  --primary: #2f5bd3;
+  --primary-hover: #244bb3;
+  --primary-soft: #e8eefc;
+  --primary-contrast: #ffffff;
+  --danger: #c62f2f;
+  --danger-hover: #a92525;
+  --danger-soft: #fdecec;
+  --success: #1f8a4c;
+  --info: #2f5bd3;
+  --warning-bg: #fff6db;
+  --warning-fg: #6b4e00;
+  --warning-border: #f0d68a;
+  --radius: 8px;
+  --shadow: 0 8px 24px rgb(16 24 40 / 12%);
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+}
+
+a {
+  color: var(--primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  z-index: 2000;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+
+  &:focus {
+    left: 0.5rem;
+  }
+}
+
+/* ---------- Page layout ---------- */
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--hover);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn--primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-contrast);
+
+  &:hover:not(:disabled) {
+    background: var(--primary-hover);
+  }
+}
+
+.btn--danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: var(--danger-hover);
+  }
+}
+
+.btn--small {
+  min-height: 1.9rem;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.875rem;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hover);
+    color: var(--text);
+  }
+}
+
+/* ---------- Forms ---------- */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+
+  label {
+    font-weight: 500;
+  }
+}
+
+.input,
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.form-field input.ng-invalid.ng-touched,
+.form-field select.ng-invalid.ng-touched,
+.form-field textarea.ng-invalid.ng-touched {
+  border-color: var(--danger);
+}
+
+.field-errors {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--danger);
+  font-size: 0.85rem;
+}
+
+/* ---------- Shared state components (empty / loading / error) ---------- */
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.state--error {
+  border-style: solid;
+  border-color: #f3c4c4;
+  background: var(--danger-soft);
+}
+
+.state__title {
+  margin: 0;
+}
+
+.state__message {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 3px solid var(--primary-soft);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2.4s;
+  }
+}
+
+/* ---------- Dialog ---------- */
+
+.dialog {
+  width: min(32rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  border: none;
+  border-radius: calc(var(--radius) + 4px);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+
+  &::backdrop {
+    background: rgb(16 24 40 / 45%);
+  }
+}
+
+.dialog__panel {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  gap: 1rem;
+}
+
+.dialog__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dialog__title {
+  margin: 0;
+}
+
+.dialog__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.confirm-message {
+  margin: 0;
+  color: var(--text-muted);
+}

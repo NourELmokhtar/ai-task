@@ -1,0 +1,30 @@
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="shell">
+  <header class="shell__sidebar">
+    <a class="brand" routerLink="/dashboard">QuickFlow</a>
+    <nav class="nav" aria-label="Main navigation" data-testid="main-nav">
+      <ul class="nav__list">
+        @for (item of navItems; track item.path) {
+          <li>
+            <a
+              class="nav__link"
+              [routerLink]="item.path"
+              routerLinkActive="nav__link--active"
+              ariaCurrentWhenActive="page"
+            >
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+  </header>
+
+  <div class="shell__main">
+    <app-connectivity-banner />
+    <main id="main-content" class="shell__content" tabindex="-1">
+      <router-outlet />
+    </main>
+  </div>
+</div>
+<app-toast-host />
